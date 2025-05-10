@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title></title>
+<link rel="stylesheet" type="text/css" href="iniciose.css">
+
+</head>
+
+<nav class="navbar">
+  <div class="perfil">
+    <label for="input-foto" style="cursor:pointer;">
+      <div id="preview-container">
+        <img id="preview-img" src="https://via.placeholder.com/40" alt="📷">
+      </div>
+    </label>
+    <input type="file" id="input-foto" accept="image/*" style="display:none;">
+  </div>
+
+  <div class="logo">
+        <div class="logo">
+    <div class="img">    <img src="logo1.png">
+</div></div>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="index.html" onclick="cargarContenido('inicio.html')">Inicio</a></li>
+    <li><a href="#" onclick="cargarContenido('contacto.html')">Contacto</a></li>
+    <li><a href="#" onclick="cargarContenido('login.html')">Iniciar sesión</a></li>
+    <li class="carrito-nav">
+      <button class="btn-carrito-nav" onclick="verCarrito()">🛒</button>
+      <div id="contador-carrito" class="contador-carrito">0</div>
+    </li>
+  </ul>
+</nav>
+
+  <div id="contenido">
+    <!-- Aquí se cargará el contenido -->
+  </div>
+
+  <script>
+   // Cargar imagen desde localStorage al iniciar
+window.onload = function () {
+  const imagenGuardada = localStorage.getItem("fotoPerfil");
+  if (imagenGuardada) {
+    document.getElementById("preview-img").src = imagenGuardada;
+  }
+  cargarContenido('inicio.html');
+};
+
+document.getElementById("input-foto").addEventListener("change", function (event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const imageData = e.target.result;
+      document.getElementById("preview-img").src = imageData;
+
+      // Guardar la imagen en localStorage
+      localStorage.setItem("fotoPerfil", imageData);
+    };
+    reader.readAsDataURL(file);
+  }
+});
+  </script>
+
+ <body bgcolor="#ebdecc">
+ </body>
+</div>
+</div>
+<br><br>
+<section class="servicios content">
+<h2>CONTACTO E INFORMACION</h2>
+
+<div class="servicios-content">
+
+<div class="servicios-1">
+💬
+<h3> nuestras redes sociales </h3>
+<p>
+INSTAGRAM Y  FACEBOOCK
+</p>
+
+<div class="servicios-content">
+
+<div class="servicios-1">
+☎️
+<h3> CONTACTO TELEFONICO</h3>
+<p>
+ 664-844-9458
+</p>
+</div>
+
+<div class="servicios-content">
+
+<div class="servicios-1">
+👥
+<h3> INFORMACION DE EMPRESA</h3>
+<p>
+SEGURIDAD
+</p>
+</div>
+</section>
+
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <link rel="stylesheet" href="con1.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro | 6ix9ine Hats</title>
+</head>
+<body>
+
+  <!-- Barra de navegación -->
+  <nav class="navbar">
+    <div class="perfil">
+      <label for="input-foto" style="cursor:pointer;">
+        <div id="preview-container">
+          <img id="preview-img" src="https://via.placeholder.com/40" alt="📷">
+          <div class="logo">
+            <div class="img">    
+              <img src="logo1.png" alt="Logo 6ix9ine">
+            </div>
+          </div>
+        </div>
+      </label>
+      <input type="file" id="input-foto" accept="image/*" style="display:none;">
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="servicio.html">Servicios</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="correo.html">Iniciar sesión</a></li>
+    </ul>
+  </nav>
+
+  <!-- Formulario de Registro -->
+  <div class="container4">
+    <h2>Registro</h2>
+    <form
+      id="form-registro"
+      action="https://formspree.io/f/mnndzzke"
+      method="POST"
+      enctype="multipart/form-data">
+      <label for="nombre">Nombre completo:</label>
+      <input type="text" id="nombre" name="nombre" placeholder="Ingresa tu nombre completo" required>
+
+      <label for="correo">Correo electrónico:</label>
+      <input type="email" id="correo" name="email" placeholder="Ingresa tu correo" required>
+
+      <button type="submit">Registrar</button>
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <header>
+      <img src="logo.png" alt="Logo de 69HATS">
+      <p>© 2025 69HATS | TODOS LOS DERECHOS RESERVADOS</p>
+    </header>
+  </footer>
+
+  <script>
+    // Guardar el nombre en localStorage (opcional)
+    document.getElementById('form-registro').addEventListener('submit', function(event) {
+      const nombre = document.getElementById('nombre').value;
+      const correo = document.getElementById('correo').value;
+
+      localStorage.setItem('nombreUsuario', nombre);
+      localStorage.setItem('correoUsuario', correo);
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>69HATS</title>
+       <link rel="stylesheet" href="iniciose.css">
+</head>
+<body>
+  
+<nav class="navbar">
+  
+    <label for="input-foto" style="cursor:pointer;">
+     <style>
+    body {
+    .welcome-message {
+      font-size: 1.2em;
+      color: white;
+    }
+  </style>
+  <div class="welcome-message">
+    <!-- Aquí se mostrará el nombre del usuario -->
+    <p>Hola, <span id="usuario-nombre"></span>!</p>
+  </div>
+
+  <script>
+    const nombreUsuario = localStorage.getItem('nombreUsuario');
+
+    if (nombreUsuario) {
+      document.getElementById('usuario-nombre').textContent = nombreUsuario;
+    } else {
+      // Si no está registrado, mostrar un mensaje por defecto
+      document.getElementById('usuario-nombre').textContent = 'Invitado';
+    }
+  </script>
+      <div id="preview-container">
+        <img id="preview-img" src="https://via.placeholder.com/40" alt="📷"> <div class="logo">
+    <div class="img">    <img src="logo1.png">
+</div></div>
+
+      </div>
+    </label>
+    <input type="file" id="input-foto" accept="image/*" style="display:none;">
+  </div>
+
+ 
+  <ul class="nav-links">
+    <li><a href="index.html" onclick="cargarContenido('inicio.html')">Inicio</a></li>
+    <li><a href="servicio.html" onclick="cargarContenido('servicio.html')">Servicios</a></li>
+    <li><a href="#" onclick="cargarContenido('contacto.html')">Contacto</a></li>
+    <li><a href="correo.html" onclick="cargarContenido('login.html')">Iniciar sesión</a></li>
+    
+  <!-- Barra de navegación -->
+  <nav class="navbar">
+    <div class="logo"></div>
+  <div class="carrito-nav">
+    <button class="btn-carrito-nav" onclick="verCarrito()">
+      <span class="icono-carrito">🛒</span>
+    </button>
+    <div id="contador-carrito" class="contador-carrito">0</div>
+  </div>
+</nav>
+
+<!-- Carrito emergente -->
+<div id="carrito-modal" class="carrito-modal" style="display: none;">
+  <div class="carrito-contenido">
+    <h2>Tu carrito</h2>
+    <ul id="carrito-lista"></ul>
+    <p>Total: $<span id="total-carrito">0</span></p>
+    <a href="carro.html">
+      <button class="btn-pagar">Pagar</button>
+    </a>
+    <br><br>
+    <button id="ver-mas" style="display: none;" onclick="mostrarMas()">Ver más</button>
+     <button id="ver-mas" style="display: none;" onclick="mostrarMas()">Ver más</button>
+     <br><br>
+    <button onclick="vaciarCarrito()">Borrar todo</button> 
+    <br><br>   <button onclick="cerrarCarrito()">Cerrar</button>
+
+  </div>
+</div>
+
+<script>
+  // Función para agregar productos al carrito
+  function agregarAlCarrito(nombre, precio) {
+    const producto = { nombre, precio };
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    carrito.push(producto);
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    document.getElementById("contador-carrito").textContent = carrito.length;
+  }
+
+  // Función para ver el carrito
+  function verCarrito() {
+    const modal = document.getElementById("carrito-modal");
+    const lista = document.getElementById("carrito-lista");
+    const totalSpan = document.getElementById("total-carrito");
+    const verMasBtn = document.getElementById("ver-mas");
+
+    // Limpiar la lista de productos en el carrito
+    lista.innerHTML = "";
+
+    // Leer el carrito desde localStorage
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+    if (carrito.length === 0) {
+      lista.innerHTML = "<li>El carrito está vacío</li>";
+      totalSpan.textContent = 0;
+    } else {
+      let total = 0;
+      let maxItems = 5;  // Número de productos a mostrar inicialmente
+      let productosMostrados = 0;
+
+      // Mostrar los primeros 5 productos
+      for (let i = 0; i < carrito.length; i++) {
+        if (productosMostrados < maxItems) {
+          const producto = carrito[i];
+          const item = document.createElement("li");
+          item.textContent = `${producto.nombre} - $${producto.precio}`;
+          lista.appendChild(item);
+          total += producto.precio;
+          productosMostrados++;
+        } else {
+          // Una vez que mostramos los primeros 5 productos, no los mostramos más
+          break;
+        }
+      }
+
+      totalSpan.textContent = total;
+
+      // Si hay más productos, mostramos el botón "Ver más"
+      if (carrito.length > maxItems) {
+        verMasBtn.style.display = "block";
+      } else {
+        verMasBtn.style.display = "none";
+      }
+    }
+
+    modal.style.display = "block";
+  }
+
+  // Función para cerrar el modal del carrito
+  function cerrarCarrito() {
+    document.getElementById("carrito-modal").style.display = "none";
+  }
+
+  // Función para mostrar más productos
+  function mostrarMas() {
+    const modal = document.getElementById("carrito-modal");
+    const lista = document.getElementById("carrito-lista");
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const verMasBtn = document.getElementById("ver-mas");
+
+    // Limpiar la lista y mostrar todos los productos
+    lista.innerHTML = "";
+
+    let total = 0;
+    carrito.forEach(producto => {
+      const item = document.createElement("li");
+      item.textContent = `${producto.nombre} - $${producto.precio}`;
+      lista.appendChild(item);
+      total += producto.precio;
+    });
+
+    // Actualizar el total
+    document.getElementById("total-carrito").textContent = total;
+
+    // Ocultar el botón "Ver más" después de mostrar todos los productos
+    verMasBtn.style.display = "none";
+  }
+
+  // Función para actualizar el contador del carrito cuando la página se carga
+  function actualizarContadorCarrito() {
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    document.getElementById("contador-carrito").textContent = carrito.length;
+  }
+
+  // Llamar a la función de actualización al cargar la página
+  window.onload = actualizarContadorCarrito;
+
+   function vaciarCarrito() {
+    // Eliminar todos los productos en el carrito del localStorage
+    localStorage.removeItem('carrito');
+
+    // Actualizar la vista del carrito y el contador
+    document.getElementById("carrito-lista").innerHTML = "<li>El carrito está vacío</li>";
+    document.getElementById("total-carrito").textContent = 0;
+    document.getElementById("contador-carrito").textContent = 0;
+
+    // Cerrar el modal
+    cerrarCarrito();
+  }
+
+  // Función para actualizar el contador del carrito cuando la página se carga
+  function actualizarContadorCarrito() {
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    document.getElementById("contador-carrito").textContent = carrito.length;
+  }
+
+  // Llamar a la función de actualización al cargar la página
+  window.onload = actualizarContadorCarrito;
+</script>
+
+
+  </ul>
+</nav>
+
+
+<script>
+window.onload = function () {
+  const imagenGuardada = localStorage.getItem("fotoPerfil");
+  const previewImg = document.getElementById("preview-img");
+
+  if (imagenGuardada) {
+    previewImg.src = imagenGuardada;
+  } else {
+    previewImg.src = "https://via.placeholder.com/40"; // Imagen por defecto
+  }
+
+  cargarContenido('index.html');
+};
+
+// Cuando el usuario selecciona una nueva foto
+document.getElementById("input-foto").addEventListener("change", function (event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const imageData = e.target.result;
+      document.getElementById("preview-img").src = imageData;
+      localStorage.setItem("fotoPerfil", imageData);
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
+// Escuchar cambios de localStorage desde otras pestañas
+window.addEventListener("storage", function (event) {
+  if (event.key === "fotoPerfil") {
+    document.getElementById("preview-img").src = event.newValue || "https://via.placeholder.com/40";
+  }
+});
+</script>
+
+    <main style="padding: 40px;">
+       <center> <h1>BIENVENIDOS A 6IX9INE.</h1></center>
+       <center> <p>GORRAS DE BUENA CALIDAD</p></center>
+    </main>
+ 
+</head>
+</body>
+   <body>
+    <header style="padding: 10px;">
+        <img src="logo.png" alt="Logo de 69HATS">
+    </header>
+
+    <div class="container">
+        <section class="indice">
+            <div>
+                <a href="ofertas.html">
+                    <img src="Ofertas.png">
+                    <p><strong>Ofertas</strong></p>
+                </a>
+            </div>
+            <div>
+                <a href="masproductos.html">
+                    <img src="prox.png">
+                    <p><strong>Mas Productos</strong></p>
+                </a>
+            </div>
+         
+        </section>
+<section class="cat">
+        <center>
+            <p>CATALOGO          CATALOGO          CATALOGO             CATALOGO               CATALOGO          CATALOGO                CATALOGO                CATALOGO                   CATALOGO             CATALOGO          CATALOGO              CATALOGO                CATALOGO               CATALOGO               CATALOGO             CATALOGO       CATALOGO          CATALOGO          CATALOGO             CATALOGO               CATALOGO          CATALOGO                CATALOGO                CATALOGO                   CATALOGO             CATALOGO          CATALOGO              CATALOGO                CATALOGO               CATALOGO               CATALOGO             CATALOGO</p></center>
+    </section>
+        <section class="productos">
+             <div class="producto">
+
+                <img src="stars.png" alt="Gorra elegante CT TOTAL BLACK">
+                <h3>69hats</h3>
+                <p>CT TOTAL BLACK</p>
+                <p class="precio">$500</p>
+                <a href="producto1.html">
+                    <button class="btn-comprar">Ver detalles</button>
+                </a>
+                 <div class="producto-carrito">
+<button class="btn-agregar" onclick="agregarAlCarrito('Nombre del producto', 500)">
+
+      <span class="icono-carrito">🛒</span> Añadir al Carrito
+    </button>
+  </div>
+
+            </div>
+            
+            <div class="producto">
+                <img src="TJ4.png" alt="Gorra elegante TJ RED">
+                <h3>69hats</h3>
+                <p>TJ RED</p>
+                <p class="precio">$500</p>
+                <a href="producto2.html">
+                    <button class="btn-comprar">Ver detalles</button>
+
+                </a>
+                <div class="producto-carrito">
+ <button class="btn-agregar" onclick="agregarAlCarrito('Nombre del producto', 500)">
+
+      <span class="icono-carrito">🛒</span> Añadir al Carrito
+    </button>  </div>
+            </div>
+            <div class="producto">
+                <img src="en paris (2).png" alt="Gorra elegante EN PARIS">
+                <h3>69hats</h3>
+                <p>EN PARIS</p>
+                <p class="precio">$500</p>
+                <a href="producto3.html">
+                    <button class="btn-comprar">Ver detalles</button>
+                </a>
+                <div class="producto-carrito">
+    <button class="btn-carrito" onclick="agregarAlCarrito('EN PARIS', 500)">
+ <button class="btn-agregar" onclick="agregarAlCarrito('Nombre del producto', 500)">
+
+      <span class="icono-carrito">🛒</span> Añadir al Carrito
+    </button>
+  </div>
+            </div>
+            <div class="producto">
+                <img src="god5 (2).png" alt="Gorra elegante G00D">
+                <h3>69hats</h3>
+                <p>G0D</p>
+                <p class="precio">$650</p>
+                <a href="producto4.html">
+                    <button class="btn-comprar">Ver detalles</button>
+                </a>
+                <div class="producto-carrito">
+    <button class="btn-agregar" onclick="agregarAlCarrito('Nombre del producto', 500)">
+      <span class="icono-carrito">🛒</span> Añadir al Carrito
+    </button>  </div>
+            </div>
+                 <div class="producto">
+                <img src="TJ4.png" alt="Gorra elegante TJ RED">
+                <h3>69hats</h3>
+                <p>TJ RED</p>
+                <p class="precio">$500</p>
+                <a href="producto2.html">
+                    <button class="btn-comprar">Ver detalles</button>
+
+                </a>
+                <div class="producto-carrito">
+  <button class="btn-agregar" onclick="agregarAlCarrito('Nombre del producto', 500)">
+
+      <span class="icono-carrito">🛒</span> Añadir al Carrito
+    </button>
+  </div>
+            </div>
+     <div class="producto">
+                <img src="TJ4.png" alt="Gorra elegante TJ RED">
+                <h3>69hats</h3>
+                <p>TJ RED</p>
+                <p class="precio">$500</p>
+                <a href="producto2.html">
+                    <button class="btn-comprar">Ver detalles</button>
+
+                </a>
+                <div class="producto-carrito">
+<button class="btn-agregar" onclick="agregarAlCarrito('Nombre del producto', 500)">
+
+      <span class="icono-carrito">🛒</span> Añadir al Carrito
+    </button>
+  </div>
+            </div>
+  <div class="producto">
+
+                <img src="stars.png" alt="Gorra elegante CT TOTAL BLACK">
+                <h3>69hats</h3>
+                <p>CT TOTAL BLACK</p>
+                <p class="precio">$500</p>
+                <a href="producto1.html">
+                    <button class="btn-comprar">Ver detalles</button>
+                </a>
+                <div class="producto-carrito">
+<button class="btn-agregar" onclick="agregarAlCarrito('Nombre del producto', 500)">
+      <span class="icono-carrito">🛒</span> Añadir al Carrito
+    </button>
+  </div>
+            </div>  <div class="producto">
+
+                <img src="stars.png" alt="Gorra elegante CT TOTAL BLACK">
+                <h3>69hats</h3>
+                <p>CT TOTAL BLACK</p>
+                <p class="precio">$500</p>
+                <a href="producto1.html">
+                    <button class="btn-comprar">Ver detalles</button>
+                </a>
+                <button class="btn-agregar" onclick="agregarAlCarrito('Nombre del producto', 500)">
+
+      <span class="icono-carrito">🛒</span> Añadir al Carrito
+    </button>
+            </div>
+        </section>
+    </div>
+
+
+        <footer class="footer">
+                <header>
+        <img src="logo.png" alt="Logo de 69HATS">          <p>© 2025 69HATS | TODOS LOS DERECHOS RESERVADOS</p>
+
+    </header>
+        </footer>
+</body>
+</html>

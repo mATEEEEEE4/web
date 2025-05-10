@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmación de Pago - CT TOTAL BLACK</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #111;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .confirmation-container {
+      background-color: #222;
+      padding: 30px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    h2 {
+      text-align: center;
+      color: #f39c12;
+      margin-bottom: 20px;
+    }
+
+    .confirmation-message {
+      background-color: #1a1a1a;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .confirmation-message p {
+      margin: 10px 0;
+      font-size: 16px;
+      color: #ccc;
+    }
+
+    .btn-home {
+      background-color: #3498db;
+      padding: 12px;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    .btn-home:hover {
+      background-color: #2980b9;
+    }
+
+    .btn-back {
+      background-color: #e74c3c;
+      padding: 12px;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      width: 100%;
+    }
+
+    .btn-back:hover {
+      background-color: #c0392b;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="confirmation-container">
+    <h2>¡Compra Confirmada!</h2>
+
+    <!-- Mensaje de confirmación -->
+    <div class="confirmation-message">
+      <h3>Resumen de tu Compra</h3>
+      <p><strong>Nombre:</strong> <span id="nombre-confirmacion"></span></p>
+      <p><strong>Dirección de envío:</strong> <span id="direccion-confirmacion"></span></p>
+      <p><strong>Teléfono:</strong> <span id="telefono-confirmacion"></span></p>
+      <p><strong>Correo electrónico:</strong> <span id="email-confirmacion"></span></p>
+
+      <h4>Detalles del Pedido:</h4>
+      <ul id="carrito-resumen-confirmacion">
+        <!-- Los productos se mostrarán aquí -->
+      </ul>
+      <p><strong>Total a pagar:</strong> $<span id="total-pagar-confirmacion"></span> MXN</p>
+    </div>
+
+    <!-- Botones -->
+    <button class="btn-home" onclick="window.location.href='index.html'">Volver a la Página Principal</button>
+    <button class="btn-back" onclick="window.history.back()">Volver a la Compra</button>
+  </div>
+
+  <script>
+    // Recuperar los datos de localStorage
+    const nombre = localStorage.getItem('nombre');
+    const direccion = localStorage.getItem('direccion');
+    const telefono = localStorage.getItem('telefono');
+    const email = localStorage.getItem('email');
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+    // Mostrar los datos de la compra
+    document.getElementById('nombre-confirmacion').textContent = nombre;
+    document.getElementById('direccion-confirmacion').textContent = direccion;
+    document.getElementById('telefono-confirmacion').textContent = telefono;
+    document.getElementById('email-confirmacion').textContent = email;
+
+    // Mostrar los productos del carrito
+    const carritoResumen = document.getElementById('carrito-resumen-confirmacion');
+    const totalPagar = document.getElementById('total-pagar-confirmacion');
+    let total = 0;
+
+    carrito.forEach(producto => {
+      const li = document.createElement('li');
+      li.textContent = `${producto.nombre} - $${producto.precio}`;
+      carritoResumen.appendChild(li);
+      total += producto.precio;
+    });
+
+    // Mostrar el total
+    totalPagar.textContent = total;
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Confirmación de Pedido - CT TOTAL BLACK</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #111;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .confirmation-container {
+      background-color: #222;
+      padding: 30px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      text-align: center;
+    }
+
+    h2 {
+      text-align: center;
+      color: #f39c12;
+      margin-bottom: 20px;
+    }
+
+    .resumen {
+      background-color: #1a1a1a;
+      padding: 15px;
+      border-radius: 6px;
+      color: #ccc;
+      margin-top: 20px;
+    }
+
+    .resumen p {
+      margin: 5px 0;
+    }
+
+    .btn-regresar {
+      background-color: #e67e22;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+
+    .btn-regresar:hover {
+      background-color: #d35400;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="confirmation-container">
+    <h2>¡Gracias por tu compra!</h2>
+    <p>Tu pedido ha sido recibido con éxito. A continuación, te mostramos un resumen de tu compra:</p>
+
+    <div class="resumen">
+      <p><strong>Producto:</strong> CT TOTAL BLACK</p>
+      <p><strong>Tamaño seleccionado:</strong> <span id="tamaño"></span></p>
+      <p><strong>Precio:</strong> $500 MXN</p>
+      <p><strong>Dirección de envío:</strong> <span id="direccion"></span></p>
+      <p><strong>Teléfono:</strong> <span id="telefono"></span></p>
+      <p><strong>Correo electrónico:</strong> <span id="email"></span></p>
+      <p><strong>Método de pago:</strong> <span id="pago"></span></p>
+      <p><strong>Envío:</strong> Gratis</p>
+      <p><strong>Total:</strong> $500 MXN</p>
+    </div>
+
+    <p>Recibirás un correo de confirmación con los detalles de tu pedido.</p>
+
+    <a href="index.html">
+      <button class="btn-regresar">Regresar a la tienda</button>
+    </a>
+  </div>
+
+  <script>
+    // Recuperar los datos del localStorage
+    document.getElementById('tamaño').innerText = localStorage.getItem('tamaño');
+    document.getElementById('direccion').innerText = localStorage.getItem('direccion');
+    document.getElementById('telefono').innerText = localStorage.getItem('telefono');
+    document.getElementById('email').innerText = localStorage.getItem('email');
+    document.getElementById('pago').innerText = localStorage.getItem('pago');
+  </script>
+
+</body>
+</html>

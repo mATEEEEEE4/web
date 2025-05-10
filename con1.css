@@ -1,0 +1,193 @@
+body {
+  background-image: url('fond.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+s
+/* Contenedor del formulario */
+.container4 {
+  background-color: #111; /* Fondo oscuro */
+  border: 2px solid #d4af37; /* Dorado */
+  border-radius: 10px;
+  padding: 40px 30px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5); /* Sombra dorada */
+  text-align: center;
+  margin: 0 auto; /* Centrado horizontal */
+}
+
+/* Título del formulario */
+.container4 h2 {
+  color: #d4af37; /* Color dorado */
+  margin-bottom: 30px;
+  font-size: 1.8em;
+}
+
+/* Estilos de las etiquetas */
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #ccc;
+  font-weight: bold;
+}
+
+/* Estilos de los campos de entrada */
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border: 1px solid #444; /* Borde gris oscuro */
+  border-radius: 5px;
+  background-color: #1a1a1a; /* Fondo oscuro */
+  color: #fff;
+  font-size: 15px;
+  transition: border 0.3s ease;
+}
+
+/* Estilo cuando el campo está en foco */
+input:focus {
+  border-color: #d4af37; /* Borde dorado */
+  outline: none;
+}
+
+/* Estilos del botón de envío */
+button[type="submit"] {
+  background-color: #d4af37; /* Dorado */
+  color: #000; /* Texto negro */
+  font-weight: bold;
+  border: none;
+  padding: 12px;
+  border-radius: 5px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Efecto hover en el botón */
+button[type="submit"]:hover {
+  background-color: #c19e35; /* Dorado más oscuro */
+}
+
+/* Footer */
+footer {
+  background-color: #333;
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
+
+footer img {
+  height: 50px;
+  width: 50px;
+  margin-bottom: 10px;
+}
+
+footer p {
+  margin: 0;
+  font-size: 14px;
+  color: #ccc;
+}
+
+
+/* Barra de navegación */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, black);
+    padding: 15px 30px;
+    color: ;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Logo */
+.logo {
+    font-size: 1.8em;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Navegación */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1em;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-links li a::after {
+    content: close-quote;
+    height: 2px;
+    width: 0%;
+    background: gold;
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    transition: width 0.3s ease;
+}
+
+.nav-links li a:hover {
+    color: gold;
+}
+
+.nav-links li a:hover::after {
+    width: 100%;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: darkgoldenrod;
+  padding: 10px 20px;
+  color: black;
+}
+
+.perfil {
+  display: flex;
+  align-items: center;
+}
+
+#preview-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#preview-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}
+.logo img{
+    height: 40px;
+    width: 40px;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-links li a {
+  color: ;
+  text-decoration: none;
+  padding: 5px 10px;
+}
